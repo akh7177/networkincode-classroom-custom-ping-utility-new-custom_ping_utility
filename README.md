@@ -35,8 +35,8 @@ pip install prettytable
 ### **2️⃣ Clone or Download the Repository**
 Either download the repository from the below link or clone as mentioned
 ```sh
-git clone https://github.com/akh7177/custom-ping-utility.git
-cd custom-ping-utility-akh7177/src
+git clone https://github.com/akh7177/networkincode-classroom-custom-ping-utility-new-custom_ping_utility.git
+cd networkincode-classroom-custom-ping-utility-new-custom_ping_utility/src
 ```
 
 ### 3️⃣ Run the script
