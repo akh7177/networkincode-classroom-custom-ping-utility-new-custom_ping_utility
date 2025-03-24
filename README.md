@@ -1,88 +1,103 @@
+
 # Custom Ping Utility
 
-## **Objective**
-The goal of this assignment is to develop a custom **ping utility** that replicates the basic functionality of the standard `ping` tool. This tool will allow users to test network reachability and measure round-trip time (RTT) for packets sent to a target IP address.
+This is a Python-based command-line tool designed to send ICMP Echo Requests (ping) to a target.This custom-built ping utility supports **ICMPv4 & ICMPv6** with features like **real-time tabular output**, **network interface selection**, and **detailed statistics**.This utility is particularly useful for network troubleshooting, latency analysis, and learning how ICMP packets work at a lower level using raw sockets. 
 
----
+## Features 🚀
+✅ Supports both **IPv4 & IPv6**  
+✅ Displays **real-time results** in a **tabular format**  
+✅ Works with **custom packet counts, TTL, and network interfaces**  
+✅ Provides **detailed statistics** including packet loss, average RTT and standard deviation of RTT  
+✅ **Admin/root detection** for privileged operations  
+✅ Supported on **Linux, Mac OS and Windows**
 
-## **Problem Statement**
-Your task is to build a **custom ping utility** that performs the following functions:
+## Output Showcase
 
-- **Send ICMP echo requests** to a target IP address.
-- **Receive and process ICMP echo replies** from the target.
-- **Calculate and display round-trip time (RTT)** for each ICMP echo request-reply cycle.
-- **[Bonus] Provide statistics** on:
-  - Packet loss
-  - Minimum RTT
-  - Maximum RTT
-  - Average RTT
-  - Standard deviation of RTT
-- **[Bonus] Provide options** to configure the utility:
-  - Choose the network interface for sending packets.
-  - Set the Time-To-Live (TTL) value.
-  - Support both **IPv4 and IPv6**.
+### Help window ❤️
 
----
+![help-window-image](./referece_images/image.png)
 
-## **Repository Setup**
-1. **Clone the repository:**
-   ```sh
-   git clone <repo-link>
-   cd custom-ping-utility
-   ```
-2. **Modify and extend the provided template** according to the requirements.
+### Ping Output ✨
 
----
+![alt text](./referece_images/image-1.png)
 
-## **Implementation Guidelines**
-- Implement socket programming to handle **ICMP (Internet Control Message Protocol) packets**.
-- Ensure compatibility with both **Linux and macOS systems**.
-- Use appropriate **error handling** to deal with network timeouts, unreachable hosts, and permission issues.
-- Structure your code to allow easy extension for bonus features.
+## 🛠️ Installation & Setup
 
----
-
-## **Documentation Requirements**
-Your submission must include:
-- A **README.md** file with:
-  - Clear **setup and installation instructions**.
-  - **Usage examples** with command-line arguments.
-  - **Required dependencies** and supported versions.
-- **Well-documented code** with meaningful comments.
-- A **script (`scripts/test.sh`)** to test the functionality of your custom ping utility.
-
----
-
-## **Example Repository Structure**
+### **1️⃣ Install Dependencies**
+Ensure you have **Python 3.6+** installed. You can check with:
+```sh
+python3 --version
 ```
-/ (Root)
-│── README.md          # Detailed assignment instructions
-│── Makefile           # Build and run commands (if applicable)
-│── src/
-│   │── main.py        # Main Python script for the ping utility
-│   │── icmp_handler.py # ICMP packet handling logic
-│── scripts/
-│   │── test.sh        # Script to test the program
+Install prettytable module with the following command
+```sh
+pip install prettytable
+```
+### **2️⃣ Clone or Download the Repository**
+Either download the repository from the below link or clone as mentioned
+```sh
+git clone https://github.com/akh7177/custom-ping-utility.git
+cd custom-ping-utility-akh7177/src
 ```
 
----
+### 3️⃣ Run the script
+**Note: This script required admin/root access as it involves the use of raw scokets.** 
 
-## **Resources**
-- [What are Ping and Traceroute Really?](https://blog.apnic.net/2021/06/21/what-are-ping-and-traceroute-really/)
-- [Socket Programming Guide](https://www.cs.rpi.edu/~moorthy/Courses/os98/Pgms/socket.html)
-- [Understanding ICMP and Ping](https://avocado89.medium.com/ping-icmp-32e9eba81623)
-- **Socket Programming in Python** (for implementation reference)
+- If in Linux/Mac OS run:
+```sh
+sudo python3 main.py <target_ip/hostname>
+```
+- If in windows, open commmand prompt or powershell with administrator previlages and run:
+```sh
+python3 main.py <target_ip>
+```
+For more information regarding the script usage, refer the below section.
 
----
+## 🎯 Script Usage
+### Show Help
+```sh
+sudo python3 main.py -h
+```
+###  Basic Ping (Default: 4 Packets)
+```sh
+sudo python3 main.py <target_ip/hostname>
 
-## **Submission Instructions**
-1. Complete your implementation and ensure it meets the assignment requirements.
-2. Update the `README.md` with detailed instructions on how to build and run your solution.
-3. **Make a pull request (PR)** to submit your final code.
-4. Your PR should include:
-   - A description of your implementation.
-   - Any limitations or known issues.
-   - Example test cases demonstrating the tool's functionality.
+#Example usages
+sudo python3 main.py google.com
+sudo python3 main.py 8.8.8.8
+sudo python3 main.py 2001:4860:4860::8888
+```
+### Specify the count of packets to send 
+```sh
+sudo python3 main.py <target_ip/hostname> -c <number_of_packets_to_send>
 
-**Happy coding! 🚀**
+#Example usage
+sudo python3 main.py 8.8.8.8 -c 7
+```
+### Specify Time-To-Live (TTL) (Linux/macOS Only)
+```sh
+sudo python3 main.py 8.8.8.8 -t <time_to_live_in_ms>
+
+#Example usage
+sudo python3 main.py 8.8.8.8 -t 64
+```
+### Select a Network Interface (Linux/macOS Only)
+```sh
+sudo python3 main.py <ip_address/hostname> -i <chosen_network_interface>
+
+#Example usage
+sudo python3 main.py 8.8.8.8 -i eth0
+```
+## 🧪 Running Tests
+Automated tests can be runusing the provided test.sh script in the scripts directory.
+```sh
+chmod +x test.sh
+sudo ./test.sh
+```
+Tests include:  
+✅ Dependecies check  
+✅ Help screen output check  
+✅ IPv4 ping checks with various flags  
+✅ IPv6 ping checks  
+✅ Invalid host handling  
+
 
